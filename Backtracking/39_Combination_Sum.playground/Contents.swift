@@ -2,11 +2,13 @@ class Solution {
     func combinationSum(_ candidates: [Int], _ target: Int) -> [[Int]] {
         var res = [[Int]]()
         var curr = [Int]()
-        helper(0, target, &curr, &res, candidates)
+        var candidatesCopy = candidates
+        candidatesCopy.sort(by: <)
+        helper(0, target, &curr, &res, candidatesCopy)
         return res
     }
     
-    private func helper(_ index: Int, _ target: Int, _ curr: inout [Int], _ res: inout [[Int]], _ candidate: [Int]) {
+    private func helper(_ index: Int, _ target: Int, _ curr: inout [Int], _ res: inout [[Int]], _ candidates: [Int]) {
         if target == 0 {
             res.append(curr)
             return
@@ -14,12 +16,15 @@ class Solution {
             return;
         }
         
-        for i in index..<candidate.count {
-            if i != index && candidate[i] == candidate[i - 1] {
+        for i in index..<candidates.count {
+            if i != index && candidates[i] == candidates[i - 1] {
                 continue
             }
-            curr.append(candidate[i])
-            helper(i, target - candidate[i], &curr, &res, candidate)
+            if candidates[i] > target {
+                return
+            }
+            curr.append(candidates[i])
+            helper(i, target - candidates[i], &curr, &res, candidates)
             curr.removeLast()
         }
     }
