@@ -7,15 +7,30 @@ public class ListNode {
     }
 }
 
-func reverseLinkedList(_ head: ListNode?) -> ListNode? {
+
+func reverseList(_ head: ListNode?) -> ListNode? {
     guard let head = head else {
         return nil
     }
     guard let next = head.next else {
         return head
     }
-    let newHead = reverseLinkedList(next)
+    let newHead = reverseList(next)
     next.next = head
     head.next = nil
     return newHead
+}
+
+
+func reverseList2(_ head: ListNode?) -> ListNode? {
+    var curr = head
+    var first: ListNode?
+    
+    while curr != nil {
+        let tmp = curr
+        curr = curr!.next
+        tmp!.next = first
+        first = tmp
+    }
+    return first
 }
