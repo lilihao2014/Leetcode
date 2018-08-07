@@ -42,7 +42,7 @@ class LongestPalindrome {
     }
     
     
-    //Approach 2: Expand Around Center
+    //Approach 2: Expand Around Center, time complexity is O(n ^ 2), but space complexity is O(1)
     
     
     func longestPalindrome2(_ s: String) -> String {
