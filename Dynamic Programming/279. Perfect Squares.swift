@@ -1,3 +1,11 @@
+//
+//  279. Perfect Squares.swift
+//  LeetCode_Swift
+//
+//  Created by Lihao Li on 2018/8/9.
+//  Copyright © 2018 Lihao Li. All rights reserved.
+//
+
 class NumSquares {
     func numSquares(_ n: Int) -> Int {
         guard n > 0 else {
@@ -15,3 +23,4 @@ class NumSquares {
         return res[n]
     }
 }
+
