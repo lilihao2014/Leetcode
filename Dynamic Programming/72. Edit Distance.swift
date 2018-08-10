@@ -1,3 +1,11 @@
+//
+//  72. Edit Distance.swift
+//  LeetCode_Swift
+//
+//  Created by Lihao Li on 2018/8/9.
+//  Copyright © 2018 Lihao Li. All rights reserved.
+//
+
 class MinDistance {
     func minDistance(_ word1: String, _ word2: String) -> Int {
         let rows = word1.count + 1
@@ -25,3 +33,4 @@ class MinDistance {
         return res[rows - 1][columns - 1]
     }
 }
+
