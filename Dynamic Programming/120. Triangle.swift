@@ -1,3 +1,11 @@
+//
+//  120. Triangle.swift
+//  LeetCode_Swift
+//
+//  Created by Lihao Li on 2018/8/9.
+//  Copyright © 2018 Lihao Li. All rights reserved.
+//
+
 class MinimumTotal {
     func minimumTotal(_ triangle: [[Int]]) -> Int {
         guard triangle.count > 0, triangle[0].count > 0 else {
@@ -16,3 +24,4 @@ class MinimumTotal {
         return res[0][0]
     }
 }
+
