@@ -1,3 +1,11 @@
+//
+//  152. Maximum Product Subarray.swift
+//  LeetCode_Swift
+//
+//  Created by Lihao Li on 2018/8/9.
+//  Copyright © 2018 Lihao Li. All rights reserved.
+//
+
 class MaxProduct {
     func maxProduct(_ nums: [Int]) -> Int {
         guard nums.count > 0 else {
@@ -19,3 +27,4 @@ class MaxProduct {
         return res
     }
 }
+
