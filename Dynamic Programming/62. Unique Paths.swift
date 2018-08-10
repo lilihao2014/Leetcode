@@ -1,3 +1,11 @@
+//
+//  62. Unique Paths.swift
+//  LeetCode_Swift
+//
+//  Created by Lihao Li on 2018/8/9.
+//  Copyright © 2018 Lihao Li. All rights reserved.
+//
+
 class UniquePaths {
     func uniquePaths(_ m: Int, _ n: Int) -> Int {
         var res = Array(repeating: Array(repeating: 0, count: n), count: m)
