@@ -12,8 +12,7 @@ class NumJewelsInStones {
     func numJewelsInStones(_ J: String, _ S: String) -> Int {
         let jSet = Set(J)
         var count = 0
-        let sArray = Array(S)
-        for character in sArray {
+        for character in S {
             if jSet.contains(character) {
                 count += 1
             }
