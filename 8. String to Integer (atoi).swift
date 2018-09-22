@@ -1,4 +1,14 @@
-class Solution {
+//
+//  8. String to Integer (atoi).swift
+//  LeetCode_Swift
+//
+//  Created by Lihao Li on 2018/9/21.
+//  Copyright © 2018 Lihao Li. All rights reserved.
+//
+
+import Foundation
+
+class MyAtoi {
     func myAtoi(_ str: String) -> Int {
         var res = 0
         var start = 0
@@ -6,15 +16,12 @@ class Solution {
             return res
         }
         
-        
         let charArray = Array(str)
         while start < charArray.count && charArray[start] == " " {
             start += 1
         }
         
-        guard start < charArray.count else {
-            return res
-        }
+        guard start < charArray.count else { return res }
         
         var flag = 1
         if charArray[start] == "+" {
@@ -43,7 +50,6 @@ class Solution {
                 break
             }
         }
-        
         return res * flag
     }
 }
