@@ -9,7 +9,6 @@
 import Foundation
 
 
-
 class Rob {
     func rob(_ nums: [Int]) -> Int {
         var prev = 0, currMax = 0
