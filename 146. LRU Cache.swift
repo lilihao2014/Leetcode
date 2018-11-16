@@ -10,20 +10,20 @@ import Foundation
 
 class LRUCache {
     class Node {
-        var key: Int
-        var val: Int
         var prev: Node?
         var next: Node?
-        init(_ key: Int, _ val: Int) {
+        let key: Int
+        var value: Int
+        init(_ key: Int, _ value: Int) {
             self.key = key
-            self.val = val
+            self.value = value
         }
     }
     
-    var map = [Int: Node]()
-    var head = Node(-1, -1)
-    var tail = Node(-1, -1)
-    var capacity: Int
+    private let head = Node(-1, -1)
+    private let tail = Node(-1, -1)
+    private let capacity: Int
+    private var map = [Int: Node]()
     
     init(_ capacity: Int) {
         self.capacity = capacity
@@ -31,39 +31,36 @@ class LRUCache {
         tail.prev = head
     }
     
-    
     func get(key: Int) -> Int? {
         guard let curr = map[key] else { return nil }
         
         curr.prev?.next = curr.next
         curr.next?.prev = curr.prev
-        moveToTail(node: curr)
-        return curr.val
+        moveToTail(curr)
+        return curr.value
     }
     
-    
     func set(key: Int, val: Int) {
-        if map[key] != nil {
+        if let preVal = get(key: key), preVal != val {
             let node = map[key]
-            node?.val = val
+            node?.value = val
             return
         }
         
         if map.count == capacity {
-            if let firstNode = head.next {
-                map[firstNode.key] = nil
+            if let node = head.next {
                 head.next = head.next?.next
                 head.next?.prev = head
+                map[node.key] = nil
             }
         }
         
         let curr = Node(key, val)
         map[key] = curr
-        moveToTail(node: curr)
+        moveToTail(curr)
     }
     
-    
-    private func moveToTail(node: Node) {
+    private func moveToTail(_ node: Node) {
         node.prev = tail.prev
         tail.prev = node
         node.prev?.next = node
