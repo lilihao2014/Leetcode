@@ -9,27 +9,26 @@
 import Foundation
 
 class LetterCombinations {
+    private let numbersMap: [Character: String] = ["2": "abc", "3": "def", "4": "ghi", "5": "jkl", "6": "mno", "7": "pqrs", "8": "tuv", "9": "wxyz"]
+    
     func letterCombinations(_ digits: String) -> [String] {
-        let numbersMap: [Character: String] = ["2": "abc", "3": "def", "4": "ghi", "5": "jkl", "6": "mno", "7": "pqrs", "8": "tuv", "9": "wxyz"]
-        var res = [String]()
-        var digitsArray = Array(digits)
-        for i in 0..<digitsArray.count {
-            let curr = digitsArray[i]
-            guard let values = numbersMap[curr] else { return res }
+        var queue = [String]()
+        for (index, key) in digits.enumerated() {
+            guard let valueString = numbersMap[key] else { return queue }
             
-            if i == 0 {
-                for value in values {
-                    res.append(String(value))
+            if index == 0 {
+                for element in valueString {
+                    queue.append(String(element))
                 }
             }else {
-                while res.first!.count <= i {
-                    let curr = res.removeFirst()
-                    for value in values {
-                        res.append(String(curr + String(value)))
+                while queue.first!.count <= index {
+                    let previousValue = queue.removeFirst()
+                    for element in valueString {
+                        queue.append(previousValue + String(element))
                     }
                 }
             }
         }
-        return res
+        return queue
     }
 }
