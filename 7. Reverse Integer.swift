@@ -10,12 +10,10 @@ import Foundation
 
 class Reverse {
     func reverse(_ x: Int) -> Int {
-        var x = x
         var res = 0
+        var x = x
         while x != 0 {
-            if res > Int(Int32.max) / 10 || res < Int(Int32.min) / 10 {
-                return 0
-            }
+            if res < Int32.min / 10 || res > Int32.max / 10 { return 0 }
             res = res * 10 + x % 10
             x /= 10
         }
