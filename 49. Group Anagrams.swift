@@ -21,8 +21,8 @@ class GroupAnagrams {
                 dict[key] = [string]
             }
         }
-        for key in dict.keys {
-            res.append(dict[key]!)
+        for value in dict.values {
+            res.append(value)
         }
         return res
     }
