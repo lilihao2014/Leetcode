@@ -11,15 +11,22 @@ import Foundation
 class RemoveNthFromEnd {
     func removeNthFromEnd(_ head: ListNode?, _ n: Int) -> ListNode? {
         var l1 = head, l2 = head
+        
         for _ in 1..<n + 1 {
             l1 = l1?.next
         }
-        guard l1 != nil else { return head?.next }
+        
+        if l1 == nil {
+            return head?.next
+        }
+        
         while l1?.next != nil {
             l1 = l1?.next
             l2 = l2?.next
         }
+        
         l2?.next = l2?.next?.next
+        
         return head
     }
 }
