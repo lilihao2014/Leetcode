@@ -8,6 +8,8 @@
 
 class MaxProfit3 {
     func maxProfit(_ prices: [Int]) -> Int {
+        guard !prices.isEmpty else { return 0 }
+        
         var res = Array(repeating: 0, count: 3)
         var curr = Array(repeating: 0, count: 3)
         for i in 0..<prices.count - 1 {
