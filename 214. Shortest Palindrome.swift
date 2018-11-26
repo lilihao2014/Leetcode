@@ -11,20 +11,18 @@ import Foundation
 
 class ShortestPalindrome {
     func shortestPalindrome(_ s: String) -> String {
-        guard !s.isEmpty else { return "" }
-        
-        var sArray = Array(s)
+        let sArray = Array(s)
         var j = 0
         for i in (0..<s.count).reversed() {
             if sArray[i] == sArray[j] {
                 j += 1
             }
         }
-        if j == sArray.count { return s }
-        
-        let suffix = String(s[s.index(s.startIndex, offsetBy: j)..<s.index(s.startIndex, offsetBy: s.count)])
+        if j == s.count { return s }
+        let suffix = String(sArray[j...])
         let prefix = suffix.reversed()
-        let mid = shortestPalindrome(String(s[s.index(s.startIndex, offsetBy: 0)..<s.index(s.startIndex, offsetBy: j)]))
+        let mid = shortestPalindrome(String(sArray[0..<j]))
+        
         return prefix + mid + suffix
     }
 }
