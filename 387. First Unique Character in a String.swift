@@ -11,12 +11,13 @@ import Foundation
 class FirstUniqChar {
     func firstUniqChar(_ s: String) -> Int {
         var alpArray = Array(repeating: 0, count: 26)
-        var locationArray = Array(repeating: Int.min, count: 26)
+        var locationArray = Array(repeating: Int.max, count: 26)
+        let sArray = Array(s)
         
-        for i in 0..<s.count {
-            let c = s[s.index(s.startIndex, offsetBy: i)]
-            let utf8C = String(c).utf8
-            let value = Int(utf8C[utf8C.startIndex])
+        for i in 0..<sArray.count {
+            let c = sArray[i]
+            let cUTF8 = String(c).utf8
+            let value = Int(cUTF8[cUTF8.startIndex])
             alpArray[value - 97] += 1
             locationArray[value - 97] = i
         }
