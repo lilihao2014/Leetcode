@@ -10,40 +10,39 @@ import Foundation
 
 class Multiply {
     func multiply(_ num1: String, _ num2: String) -> String {
-        let count = num1.count + num2.count
-        var res = [Int](repeating: 0, count: count)
+        var numArray = Array(repeating: 0, count: num1.count + num2.count)
         let num1Array = Array(num1)
         let num2Array = Array(num2)
         
         for i in (0..<num1Array.count).reversed() {
             for j in (0..<num2Array.count).reversed() {
-                res[i + j + 1] += Int(String(num1Array[i]))! * Int(String(num2Array[j]))!
+                numArray[i + j + 1] += Int(String(num1Array[i]))! * Int(String(num2Array[j]))!
             }
         }
         
         var carry = 0
-        for i in (0..<res.count).reversed() {
-            let currValue = res[i] + carry
-            res[i] = currValue % 10
-            carry = currValue / 10
+        for i in (0..<numArray.count).reversed() {
+            let sum = numArray[i] + carry
+            numArray[i] = sum % 10
+            carry = sum / 10
         }
         
-        var str = ""
-        var firstDigitIsZero = false
-        if res[0] == 0 {
-            firstDigitIsZero = true
-            res[0] = -1
+        var res = ""
+        var firstIsZero = false
+        if numArray[0] == 0 {
+            firstIsZero = true
         }else {
-            str += String(res[0])
+            res.append(String(numArray[0]))
         }
-        for i in 1..<res.count {
-            if firstDigitIsZero && res[i - 1] == -1 && res[i] == 0 {
-                res[i] = -1
+        
+        for i in 1..<numArray.count {
+            if firstIsZero && numArray[i] == 0 {
                 continue
             }
-            firstDigitIsZero = false
-            str += String(res[i])
+            
+            firstIsZero = false
+            res.append(String(numArray[i]))
         }
-        return str.count == 0 ? "0" : str
+        return res.count == 0 ? "0" : res
     }
 }
