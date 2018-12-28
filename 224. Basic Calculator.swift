@@ -10,45 +10,33 @@ import Foundation
 
 class Calculate {
     func calculate(_ s: String) -> Int {
-        var stack = [Int]()
-        var sign = 1
-        stack.append(1)
         var res = 0
-        var i = 0
-        while i < s.count {
-            let c = s[s.index(s.startIndex, offsetBy: i)]
-            if c == " " {
-                i += 1
-                continue
-            }else if c == "+" {
-                i += 1
+        var num = 0
+        var sign = 1
+        var stack = [Int]()
+        let sArray = Array(s)
+        
+        for i in 0..<sArray.count {
+            if let currentNumber = Int(String(sArray[i])) {
+                num = num * 10 + currentNumber
+            }else if sArray[i] == "+" || sArray[i] == "-" {
+                res = res + num * sign
+                sign = sArray[i] == "+" ? 1 : -1
+                num = 0
+            }else if sArray[i] == "(" {
+                stack.append(res)
+                stack.append(sign)
                 sign = 1
-            }else if c == "-" {
-                i += 1
-                sign = -1
-            }else if c == "(" {
-                stack.append((stack.last ?? 1) * sign)
+                res = 0
+            }else if sArray[i] == ")" {
+                res += sign * num
+                let tmp = stack.removeLast() * res
+                res = tmp + stack.removeLast()
                 sign = 1
-                i += 1
-            }else if c == ")" {
-                if !stack.isEmpty {
-                    stack.removeLast()
-                }
-                i += 1
-            }else {
-                if var tmp = Int(String(c)) {
-                    while i + 1 < s.count, let value = Int(String(s[s.index(s.startIndex, offsetBy: i + 1)])) {
-                        if tmp * 10 + value > 2147483647 {
-                            return 2147483647
-                        }
-                        tmp = tmp * 10 + value
-                        i += 1
-                    }
-                    res += sign * (stack.last ?? 1) * tmp
-                    i += 1
-                }
+                num = 0
             }
         }
-        return res
+        
+        return num == 0 ? res : res + sign * num
     }
 }
