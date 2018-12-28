@@ -10,25 +10,29 @@ import Foundation
 
 class MaxSlidingWindow {
     func maxSlidingWindow(_ nums: [Int], _ k: Int) -> [Int] {
-        guard nums.count > 0 else { return [Int]() }
-        var res = Array(repeating: 0, count: nums.count - k + 1)
+        guard !nums.isEmpty, nums.count >= k else { return [Int]() }
+        
+        var res = [Int]()
         var queue = [Int]()
-        var currentIndex = 0
+        
         for i in 0..<nums.count {
-            while let first = queue.first, first < i - k + 1 {
+            while !queue.isEmpty && queue.first! <= i - k {
                 queue.removeFirst()
             }
-            while let last = queue.last, nums[last] < nums[i] {
+            
+            while !queue.isEmpty && nums[queue.last!] < nums[i] {
                 queue.removeLast()
             }
+            
             queue.append(i)
+            
             if i >= k - 1 {
-                if let first = queue.first {
-                    res[currentIndex] = nums[first]
-                    currentIndex += 1
+                if let firstIndex = queue.first {
+                    res.append(nums[firstIndex])
                 }
             }
         }
+        
         return res
     }
 }
